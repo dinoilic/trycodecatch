@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
+
 from django.shortcuts import render
 
 from .models import User
@@ -23,7 +24,16 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
 
-    fields = ['name', ]
+    fields = [
+        'name',
+        'email',
+        'telephone_number',
+        'date_of_birth',
+        'gender',
+        'comment',
+        'bloodtype',
+        'location'
+    ]
 
     # we already imported User in the view code above, remember?
     model = User
@@ -36,6 +46,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         # Only get the User record for the user making the request
         return User.objects.get(username=self.request.user.username)
+
 
 
 class UserListView(LoginRequiredMixin, ListView):

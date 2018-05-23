@@ -16,8 +16,99 @@
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
+  <div>
+  	<p>Registracijom potvrđujete da prihvaćate <a href="#" data-toggle="modal" data-target="#gdprmodal">opće uvjete korištenja</a>.</p>
+  </div>
   <button class="btn btn-primary" type="submit">{% trans "Sign Up" %} &raquo;</button>
 </form>
+
+<!-- Modal -->
+<div class="modal fade" id="gdprmodal" tabindex="-1" role="dialog" aria-labelledby="gdprmodal" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Opći uvjeti korištenja</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<p>
+			<i>Datum objave: 24.05.2018.</i>
+		</p>
+
+		<p class="text-justify">
+			U aplikaciji za upravljanje dobrovoljnim darivateljima krvi (Riteh Web Team, Vukovarska 58, 51000 Rijeka) transparentno i pažljivo upravljamo osobnim podacima. Pratimo najbitnije uredbe kao što su <a href="http://eur-lex.europa.eu/legal-content/HR/TXT/?uri=CELEX:32016R0679">Opća uredba za zaštitu osobnih podataka</a> (engl. General Data Protection Regulation – GDPR; u nastavu GDPR) i <a href="https://narodne-novine.nn.hr/clanci/sluzbeni/2012_09_106_2300.html">Zakon o zaštiti osobnih podataka</a>. Registracijom nam dajete suglasnost da podatke koje ste dali u svrhu korištenja naše usluge, koristimo i obrađujemo u različite svrhe. Sve informacije o načinu pohrane i korištenja podataka možete pročitati u ovom dokumentu.
+		</p>
+
+		<h6>Suglasnosti koje se odnose na ovo web mjesto</h6>
+
+		<p class="text-justify">
+			Ispunjavanjem obrasca za registraciju korisnik se slaže s prosljeđivanjem podataka koje zakonodavno opredjeljuje kao osobne podatke. U ovom slučaju to su: ime i prezime, e-mail adresa, adresa prebivališta, telefonski broj, datum rođenja, krvna grupa te spol.
+		</p>
+
+		<ol>
+			<li>
+				<b>OBAVEZNO:</b> suglasnost za uvid u podatke od strane osoba odgovornih za organizaciju dobrovoljnih darivanja krvi
+				<ul>
+					<li>
+						Administratori institucija koje provode dobrovoljna darivanja krvi imat će pristup svim navedenim podacima. Njima će pristup imati samo odgovorne osobe za instituciju u kojoj darujete krv, a sve u svrhu lakše komunikacije i organzacije darivanja krvi.
+					</li>
+					<li>
+						Administratori institucija moći će koristiti vaše podatke u svrhu generiranja <b>anonimnih</b> izvješća koja će pomoći u radu institucije kao i u izvješćima projekata.
+					</li>
+				</ul>
+			</li>
+			<li>
+				<b>OBAVEZNO:</b> suglasnost za primanje obavijesti o dobrovoljnih darivanjima krvi koji vrijedi 5 godina i obuhvaća:
+				<ul>
+					<li>
+						Kontaktiranje koristeći kanale kao što su e-mail i telefonski broj u svrhu obavijesti ukoliko se odvija dobrovoljno darivanje krvi.
+					</li>
+				</ul>
+			</li>
+		</ol>
+
+		<h6>Vaša prava na temelju danih suglasnosti</h6>
+
+		<p class="text-justify">
+			Pojedinac u bilo kojem trenutku može zahtijevati od voditelja obrade osobnih podataka da trajno ili privremeno prestane koristiti njegove osobne podatke u gore navedene svrhe. Takav zahtjev može bilo kada poslati na e-adresu: <a href="mailto:donirajte@krv.hr">donirajte@krv.hr</a> te detaljno navesti koje suglasnosti želi otkazati. Osim toga ima i pravno na sljedeće:
+		</p>
+		<ul>
+			<li>
+				Pravo na pristup do svojih osobnih podataka koji su u vezi s njime prikupljeni, a tom prilikom upravitelj može koristiti sva razumna sredstva za utvrđivanje identiteta pojedinca čiji su osobni podaci, posebice u okviru online usluga i online identifikatora.
+			</li>
+			<li>
+				Pravo na popravak netočnih podataka koji su u vezi s njime prikupljeni, a tom prilikom voditelj obrade može koristiti sva razumna sredstva za provjeravanje identiteta pojedinca čiji su osobni podaci, posebice u okviru online usluga i online identifikatora.
+			</li>
+			<li>
+				Pravo na ”zaborav”, odnosno brisanje svih podataka, ako su ispunjeni uvjeti iz 17. članka GDPR-a.
+			</li>
+			<li>
+				Pravo na prestanak korištenja osobnih podataka u svrhe direktnog marketinga, uključujući i profiliranje
+			</li>
+			<li>
+				Pravo na samostalno odlučivanje o korištenju osobnih podataka koje se temelji na automatiziranoj obradi.
+			</li>
+			<li>
+				Pravo da protiv voditelja obrade uloži pritužbu nadzornom tijelu, ako misli da obrada njegovih osobnih podataka krši Opću uredbu o zaštiti podataka.
+			</li>
+		</ul>
+
+		<h6>Postupak za ostvarivanje prava</h6>
+		<p class="text-justify">
+			Upoznat/a sam da sve gore navedene zahtjeve koji se tiču provođenja prava u vezi s osobnim podacima, naslovim u pismenom obliku na upravitelja, na e-mail <a href="mailto:donirajte@krv.hr">donirajte@krv.hr</a>.
+		</p>
+		<p class="text-justify">
+			Upoznat/a sam da upravitelj može od mene zahtijevati osobne podatke za potrebe pouzdane identifikacije u slučaju ostvarivanja prava, te da može odbiti zahtjev samo u slučaju ako dokaže da ne može pouzdano utvrditi moj identitet.
+		</p>
+		<p class="text-justify">
+			Upoznat/a sam da upravitelj mora odgovoriti na moj zahtjev za ostvarivanje prava, vezan za gore navedene osobne podatke, bez nepotrebnog odgađanja i u svakom slučaju u roku od mjesec dana od zaprimanja zahtjeva.
+		</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
 
