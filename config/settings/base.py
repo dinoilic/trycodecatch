@@ -71,6 +71,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'project_hackathon.users.apps.UsersConfig',
+    'project_hackathon.bloodmanager.apps.BloodManagerConfig',
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -238,3 +239,4 @@ SOCIALACCOUNT_ADAPTER = 'project_hackathon.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+AUTH_USER_MODEL = 'users.User'
