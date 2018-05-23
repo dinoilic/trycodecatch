@@ -17,20 +17,26 @@ class User(AbstractUser):
     # First Name and Last Name do not cover name patterns
     # around the globe.
     name = models.CharField(_('Name of User'), blank=True, max_length=255)
-    email = models.EmailField(_('Email of User'), max_length=255)
+    email = models.EmailField(_('Email of User'), blank=True, max_length=255)
     # for international telephone numbers
     telephone_number = models.CharField(
         _('Telephone number of User'),
-        max_length=20
+        max_length=20,
+        blank=True,
+        null=True
     )
     date_of_birth = models.DateField(
         _('Age of User'),
-        default=datetime.date.today
+        default=datetime.date.today,
+        blank=True,
+        null=True
     )
     gender = models.CharField(
         max_length=20,
         choices=GENDER_CHOICES,
-        default=""
+        default="",
+        blank=True,
+        null=True
     )
     comment = models.CharField(
         _('Additional information such as gift-giving questionnaires blood'),
@@ -40,14 +46,20 @@ class User(AbstractUser):
     bloodtype = models.CharField(
         max_length=50,
         choices=BLOOD_CHOICES,
-        default=""
+        default="",
+        blank=True,
+        null=True
     )
     location = models.ForeignKey(
         Location,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True
     )
     institution = models.ManyToManyField(
-        Institution
+        Institution,
+        blank=True,
+        null=True
     )
 
     def __str__(self):
