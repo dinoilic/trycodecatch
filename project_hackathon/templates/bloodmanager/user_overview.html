@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <div class="input-group">
+    <input class="form-control"
+           placeholder='{% trans "Input for search" %}'>
+    <div class="input-group-addon" ><i class="fa fa-search"></i></div>
+  </div>
+{% endblock content %}

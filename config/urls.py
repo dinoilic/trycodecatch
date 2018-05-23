@@ -4,9 +4,21 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+from bloodmanager.views import index_admin, index_user, user_overview, add_donator,\
+        my_profile
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
+    # admin
+    url(r'^supply_overview/$', index_admin, name='index_admin'),
+    url(r'^user_overview/$', user_overview, name='user_overview'),
+    url(r'^add_donator/$', add_donator, name='add_donator'),
+
+    # user
+    url(r'^my_donations/$', index_user, name='index_user'),
+    url(r'^my_profile/$', my_profile, name='my_profile'),
+
+
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
 
     # Django Admin, use {% url 'admin:index' %}
