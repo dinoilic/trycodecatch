@@ -57,9 +57,8 @@ class User(AbstractUser):
         null=True
     )
     institution = models.ManyToManyField(
-        Institution,
-        blank=True,
-        null=True
+        Institution,    
+        blank=True
     )
 
     def __str__(self):

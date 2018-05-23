@@ -9,7 +9,10 @@ class BloodAmount(models.Model):
 
     amount = models.IntegerField(_('Amount of blood'))
     institution = models.ForeignKey(Institution, on_delete=models.PROTECT)
-
+    bloodtype = models.CharField(
+        max_length=50,
+        choices=BLOOD_CHOICES
+    )
 
 class Donation(models.Model):
     datetime = models.DateTimeField(
