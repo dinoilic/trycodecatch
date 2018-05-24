@@ -5,12 +5,12 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from bloodmanager.views import index_admin, index_user, user_overview, add_donator,\
-        my_profile
+        my_profile, supply_overview
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     # admin
-    url(r'^supply_overview/$', index_admin, name='index_admin'),
+    url(r'^supply_overview/$', supply_overview, name='supply_overview'),
     url(r'^user_overview/$', user_overview, name='user_overview'),
     url(r'^add_donator/$', add_donator, name='add_donator'),
 
