@@ -16,9 +16,9 @@
 	</div>
 	<div class="row blood-type-row">
 		{% if notifications %}
-			<div class="card-deck">
+			<div class="card-columns">
 				{% for notification in notifications %}
-					<div class="col-4 mb-3">
+					<div class="col mb-3">
 						<div class="card" style="width: 18rem;">
 							<div class="card-header">
 								{{ notification.title }}

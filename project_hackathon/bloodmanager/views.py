@@ -70,7 +70,7 @@ def add_donator(request):
             obj.save()
             obj.institution.set(data2['institution'])
 
-            return HttpResponseRedirect(reverse('supply_overview'))
+            return HttpResponseRedirect(reverse('user_overview'))
 
     else:
         form = NewUserForm()

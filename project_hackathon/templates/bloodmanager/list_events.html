@@ -42,7 +42,9 @@
     {{ block.super }}
     <script type="text/javascript">
       $(document).ready(function() {
-        $('#events-table').DataTable();
+        $('#events-table').DataTable({
+            responsive: true,
+        });
       } );
     </script>
 {% endblock javascript %}
