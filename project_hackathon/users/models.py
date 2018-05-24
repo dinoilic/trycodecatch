@@ -50,12 +50,13 @@ class User(AbstractUser):
         blank=True,
         null=True
     )
-    location = models.ForeignKey(
-        Location,
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True
-    )
+    #location = models.ForeignKey(
+    #    Location,
+    #    on_delete=models.CASCADE,
+    #    blank=True,
+    #    null=True
+    #)
+    location = models.CharField(max_length=255)
     institution = models.ManyToManyField(
         Institution,
         blank=True
