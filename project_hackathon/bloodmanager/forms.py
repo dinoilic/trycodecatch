@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Fieldset, HTML, Div, Submit
-from project_hackathon.bloodmanager.models.main import Notification
+from project_hackathon.bloodmanager.models.main import Notification, Event
 from crispy_forms.helper import FormHelper
 from django.urls import reverse_lazy
 
@@ -101,3 +101,17 @@ class NotificationForm(forms.ModelForm):
     class Meta:
         model = Notification
         fields = ['title', 'message', 'user']
+
+
+class EventForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(EventForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-personal-data-form'
+        self.helper.form_method = 'post'
+        self.helper.form_action = reverse_lazy('send_notification_user')
+        self.helper.add_input(Submit('submit', 'Submit'))
+
+    class Meta:
+        model = Event
+        fields = ['name', 'datetime', 'description']

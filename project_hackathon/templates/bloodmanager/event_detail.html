@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Event: <small>{{ event.name }}</small></h3>
+                <span>Datum i vrjeme: <small>{{ event.datetime }}</small></span>
+                <p>
+                    Opis: {{ event.description }}
+                </p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <h4>Yes</h4>
+                <ul class="list-group">
+                    {% for person in people_yes %}
+                        <li class="list-group-item">{{ person.user.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col">
+                <h4>No</h4>
+                <ul class="list-group">
+                    {% for person in people_no %}
+                        <li class="list-group-item">{{ person.user.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block javascript %}
+{% endblock javascript %}
+

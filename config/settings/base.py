@@ -69,6 +69,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount',
     'rest_framework',
     'django.contrib.humanize',
+    'qr_code',
 ]
 LOCAL_APPS = [
     'project_hackathon.users.apps.UsersConfig',

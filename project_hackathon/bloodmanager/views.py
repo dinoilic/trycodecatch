@@ -5,9 +5,9 @@ from project_hackathon.bloodmanager.models.common import Institution
 from project_hackathon.bloodmanager.models.main import Notification
 from django.contrib.auth import get_user_model
 from bloodmanager.forms import UserForm, NotificationForm
-from project_hackathon.bloodmanager.models.main import Donation, Event
+from project_hackathon.bloodmanager.models.main import Donation, Event, EventUser
 
-from bloodmanager.forms import UserForm, NewUserForm
+from bloodmanager.forms import UserForm, NewUserForm, EventForm
 
 
 def index_admin(request):
@@ -21,7 +21,8 @@ def user_home(request):
         user=request.user
     )
     return render(request, "bloodmanager/user_home.html", {
-        'notifications': notifications
+        'notifications': notifications,
+        'user': request.user
     })
 
 def user_overview(request):
@@ -176,9 +177,74 @@ def dismiss_notification(request, pk):
 
 
 def list_events(request):
+    initial_data = {
+        'name': '',
+        'datetime': '',
+        'description': '',
+    }
 
-    events = Event.objects.all()
+    if request.method == 'POST':
+        form = EventForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            event = Event.objects.create(
+                name=data['name'],
+                datetime=data['datetime'],
+                description=data['description'],
+            )
+
+            for institution_user in request.user.institution.first().user_set.all():
+                Notification.objects.create(
+                    title="New event!",
+                    message="New event added!",
+                    user=institution_user,
+                    event=event
+                )
+
+            return render(request, "bloodmanager/event_detail.html", {
+                'event': event
+            })
+    else:
+        form = EventForm(initial=initial_data)
+        events = Event.objects.all()
 
     return render(request, "bloodmanager/list_events.html", {
+        'form': form,
         'events': events
     })
+
+
+def detail_event(request, pk):
+    event = Event.objects.get(pk=pk)
+
+    people_yes = EventUser.objects.filter(
+        event=event,
+        answer='YES'
+    )
+
+    people_no = EventUser.objects.filter(
+        event=event,
+        answer='NO'
+    )
+
+    return render(request, "bloodmanager/event_detail.html", {
+        'event': event,
+        'people_yes': people_yes,
+        'people_no': people_no
+    })
+
+
+def respond_event(request, pk, answer):
+    notification = Notification.objects.get(pk=pk)
+    event = Event.objects.get(pk=notification.event.pk)
+
+    EventUser.objects.create(
+        event=event,
+        user=request.user,
+        answer=answer
+    )
+
+    notification.viewed = True
+    notification.save()
+
+    return redirect('user_home')

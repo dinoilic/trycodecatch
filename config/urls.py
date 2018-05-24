@@ -7,7 +7,8 @@ from django.views import defaults as default_views
 from bloodmanager.views import index_admin, index_user, user_overview,\
                                add_donator, my_profile, supply_overview,\
                                send_notification, send_notification_user,\
-                               new_donation, user_home, dismiss_notification, list_events
+                               new_donation, user_home, dismiss_notification,\
+                               list_events, detail_event, respond_event
 
 
 urlpatterns = [
@@ -19,9 +20,11 @@ urlpatterns = [
     url(r'^add_donator/$', add_donator, name='add_donator'),
     url(r'^send_notification/(?P<pk>[\d.@+-]+)/(?P<blood_type>[\w.@+-]+)$', send_notification, name='send_notification'),
     url(r'^dismiss_notification/(?P<pk>[\d.@+-]+)$', dismiss_notification, name='dismiss_notification'),
+    url(r'^respond_event/(?P<pk>[\d.@+-]+)/(?P<answer>[\w.@+-]+)$', respond_event, name='respond_event'),
     url(r'^send_notification_user/$', send_notification_user, name='send_notification_user'),
     url(r'^news_donation/$', new_donation, name='new_donation'),
     url(r'^list_events/$', list_events, name='list_events'),
+    url(r'^detail_event/(?P<pk>[\d.@+-]+)$', detail_event, name='detail_event'),
 
     # user
     url(r'^my_donations/$', index_user, name='index_user'),
