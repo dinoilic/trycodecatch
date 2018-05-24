@@ -1,3 +1,26 @@
-{% include "bloodmanager/my_profile.html" %}
+{% extends "base.html" %}
+{% load i18n %}
 
+{% block content %}
 
+<br><br>
+<div class="card">
+  <article class="card-group-item">
+    <header class="card-header">
+      <h2>{{ request.user.name }}</h2>
+    </header>
+    <div class="filter-content">
+      <div class="card-body">
+        <p><strong>{% trans "Tel. number:" %} </strong> {{ request.user.telephone_number }} </p>
+        <p><strong>{% trans "Date of birth:" %} </strong> {{ request.user.date_of_birth }}</p>
+        <p><strong>{% trans "Gender:" %} </strong>{{ request.user.gender }}</p>
+        <p><strong>{% trans "Location:" %} </strong> {{ request.user.location }}</p>
+        <p><strong>{% trans "Institution" %} </strong> {{ request.user.institution.name }}</p>
+        <p><strong>{% trans "Blood type:" %} </strong>{{ request.user.bloodtype }}</p>
+      </div>
+      </div>
+    </div>
+  </article>
+
+</div>
+{% endblock content %}
