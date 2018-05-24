@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from project_hackathon.bloodmanager.models.main import BloodAmount
 from django.db.models import Max
+from django.urls import reverse
 from project_hackathon.bloodmanager.models.common import Institution
 from project_hackathon.bloodmanager.models.main import Notification
 from django.contrib.auth import get_user_model
 from bloodmanager.forms import UserForm, NotificationForm
+from django.http import HttpResponseRedirect
 from project_hackathon.bloodmanager.models.main import Donation, Event
 
 from bloodmanager.forms import UserForm, NewUserForm
@@ -52,22 +54,23 @@ def add_donator(request):
             data = form.cleaned_data
             data2 = form2.cleaned_data
 
-            # obj = get_user_model().objects.create(
-            #     username=data['username'],
-            #     password=data['password1'],
-            # )
-            # import pdb; pdb.set_trace()
-            # obj.email=data['email'],
-            # obj.telephone_number=data['telephone_number'],
-            # obj.date_of_birth=data['date_of_birth'],
-            # obj.gender=data['gender'],
-            # obj.comment=data['comment'],
-            # obj.bloodtype=data['bloodtype'],
-            # obj.location=data['location'],
-            # obj.institution=data['institution']
-            # obj.save()
-            # import pdb; pdb.set_trace()
-            # return HttpResponseRedirect(reverse('supply_overview'))
+            obj = get_user_model().objects.create(
+                username=data['username'],
+                password=data['password1']
+            )
+            print("NAME " + data2['name'])
+            obj.name = data2['name']
+            obj.email = data2['email']
+            obj.telephone_number = data2['telephone_number']
+            obj.date_of_birth = data2['date_of_birth']
+            obj.gender = data2['gender']
+            obj.comment = data2['comment']
+            obj.bloodtype = data2['bloodtype']
+            obj.location = data2['location']
+            obj.save()
+            obj.institution.set(data2['institution'])
+
+            return HttpResponseRedirect(reverse('supply_overview'))
 
     else:
         form = NewUserForm()
@@ -107,6 +110,18 @@ def my_profile(request):
         form = UserForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
+
+            obj = request.user
+            obj.name = data['name']
+            obj.email = data['email']
+            obj.telephone_number = data['telephone_number']
+            obj.date_of_birth = data['date_of_birth']
+            obj.gender = data['gender']
+            obj.comment = data['comment']
+            obj.bloodtype = data['bloodtype']
+            obj.location = data['location']
+            obj.save()
+            obj.institution.set(data['institution'])
 
             return HttpResponseRedirect(reverse('my_profile'))
 

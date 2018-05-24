@@ -28,7 +28,7 @@ class UserForm(forms.ModelForm):
                 ),
                 Div(
                     'location',
-                    Field('date_of_birth'),
+                    'date_of_birth',
                     'gender',
                     'institution',
                     'bloodtype',
