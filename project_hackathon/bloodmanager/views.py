@@ -68,7 +68,7 @@ def add_donator(request):
             obj.bloodtype = data2['bloodtype']
             obj.location = data2['location']
             obj.save()
-            obj.institution.set(data2['institution'])
+            obj.institution.add(*data2['institution'])
 
             return HttpResponseRedirect(reverse('user_overview'))
 

@@ -30,7 +30,7 @@ class UserForm(forms.ModelForm):
                     'location',
                     'date_of_birth',
                     'gender',
-                    'institution',
+                    Field('institution'),
                     'bloodtype',
                     css_class='col-sm-6'
                 ),

@@ -28,5 +28,6 @@ DH = function () {
 
 $( function() {
 	$( "#id_date_of_birth" ).datepicker({ dateFormat: 'yy-mm-dd' });
+	$( "#id_datetime" ).datetimepicker();
 } );
 
