@@ -1,6 +1,6 @@
 from django.contrib import admin
-from project_hackathon.bloodmanager.models.common import Location, Institution, Notification
-from project_hackathon.bloodmanager.models.main import BloodAmount, Donation, BloodUnit, Event
+from project_hackathon.bloodmanager.models.common import Location, Institution
+from project_hackathon.bloodmanager.models.main import BloodAmount, Donation, BloodUnit, Event, Notification
 
 admin.site.register(Location)
 admin.site.register(Institution)

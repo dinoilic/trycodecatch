@@ -50,29 +50,3 @@ class Institution(models.Model):
         return u'%s' % (
             self.name,
         )
-
-class Notification(models.Model):
-    title = models.CharField(max_length=255)
-    message = models.TextField()
-    viewed = models.BooleanField(default=False)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT
-    )
-
-    def __str__(self):
-        return u'%s - %s' % (
-            self.title,
-            self.user.username
-        )
-
-
-@receiver(post_save, sender=Notification)
-def delete_notification(sender, instance, **kwargs):
-    notifications = Notification.objects.filter(
-        user=instance.user
-    )
-
-    for notification in notifications:
-        if notification.viewed:
-            notification.delete()

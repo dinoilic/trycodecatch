@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from project_hackathon.bloodmanager.models.main import BloodAmount
 from django.db.models import Max
-from project_hackathon.bloodmanager.models.common import Institution, Notification
+from project_hackathon.bloodmanager.models.common import Institution
+from project_hackathon.bloodmanager.models.main import Notification
 from django.contrib.auth import get_user_model
 from bloodmanager.forms import UserForm, NotificationForm
 from project_hackathon.bloodmanager.models.main import Donation, Event
