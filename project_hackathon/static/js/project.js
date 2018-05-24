@@ -1,21 +1,32 @@
-/* Project specific Javascript goes here. */
+if (typeof DH == 'undefined') { // T = django ataac
+  DH = {};
+}
 
-/*
-Formatting hack to get around crispy-forms unfortunate hardcoding
-in helpers.FormHelper:
+DH = function () {
 
-    if template_pack == 'bootstrap4':
-        grid_colum_matcher = re.compile('\w*col-(xs|sm|md|lg|xl)-\d+\w*')
-        using_grid_layout = (grid_colum_matcher.match(self.label_class) or
-                             grid_colum_matcher.match(self.field_class))
-        if using_grid_layout:
-            items['using_grid_layout'] = True
+    function editProfileInfo() {
+    	$('#profile_form_id').hide();
+        $('#edit_profile_btn').on('click', function() {
+        	$('#profile_info_id').hide();
+        	$('#profile_form_id').show();
+        });
+    }
 
-Issues with the above approach:
+    function cancelEditProfile() {
+    	$('#cancel_edit_btn_id').on('click', function() {
+        	$('#profile_info_id').show();
+        	$('#profile_form_id').hide();
+        });
+    }
 
-1. Fragile: Assumes Bootstrap 4's API doesn't change (it does)
-2. Unforgiving: Doesn't allow for any variation in template design
-3. Really Unforgiving: No way to override this behavior
-4. Undocumented: No mention in the documentation, or it's too hard for me to find
-*/
-$('.form-group').removeClass('row');
+
+    return {
+    	editProfileInfo: editProfileInfo,
+    	cancelEditProfile: cancelEditProfile
+    }
+}()
+
+$( function() {
+	$( "#id_date_of_birth" ).datepicker({ dateFormat: 'yy-mm-dd' });
+} );
+
