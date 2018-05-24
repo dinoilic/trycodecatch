@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from project_hackathon.bloodmanager.models.main import BloodAmount
 
 def index_admin(request):
 
@@ -13,9 +14,10 @@ def user_overview(request):
     })
 
 def supply_overview(request):
-
+    institution = request.user.institution.first()
+    amounts = BloodAmount.objects.filter(institution=institution)
     return render(request, "bloodmanager/supply_overview.html", {
-
+        'amounts': amounts
     })
 
 def add_donator(request):

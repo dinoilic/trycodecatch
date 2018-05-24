@@ -57,7 +57,7 @@ class User(AbstractUser):
         null=True
     )
     institution = models.ManyToManyField(
-        Institution,    
+        Institution,
         blank=True
     )
 

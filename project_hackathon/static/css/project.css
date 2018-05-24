@@ -7,3 +7,14 @@
   background-color: #f2dede;
   border-color: #eed3d7;
   color: #b94a48; }
+
+.progress {
+  margin-bottom: 20px; }
+
+.container {
+  margin-top: 30px; }
+
+.blood-type-row {
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline; }

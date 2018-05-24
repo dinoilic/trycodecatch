@@ -5,46 +5,32 @@
   {# Admin supply overview #}
   <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-
-            <div class="panel panel-default panel-table">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col col-xs-6">
-                    <h3 class="panel-title">Institution name</h3>
-                  </div>
-                </div>
-              </div>
-              <div class="panel-body">
-                <table class="table table-striped table-bordered table-list">
-                  <thead>
-                    <tr>
-                        <th>{% trans "Blood type" %}</th>
-                        <th>{% trans "Dozes" %}</th>
-                        <th>{% trans "Actions" %}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                          <tr>
-                            <td>A+</td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-success" style="width:80%">80%</div>
-                              </div>
-                              <div class="progress">
-                                <div class="progress-bar bg-warning" style="width:40%">40%</div>
-                              </div>
-                              <div class="progress">
-                                <div class="progress-bar bg-danger" style="width:20%">20%</div>
-                              </div>
-                            </td>
-                            <td><button class="btn btn-default">Request more</button></td>
-                          </tr>
-                        </tbody>
-                </table>
-
-              </div>
-    </div></div>
+      <h1>Blood overview</h1>
+    </div>
+    {% for amount in amounts %}
+      <div class="row blood-type-row">
+        <div class="col-md-1">
+          <h6>{{ amount.bloodtype }}</h6>
+        </div>
+        <div class="col-md-10">
+          <div class="progress">
+            <div class="progress-bar {% if amount.amount <= 30 %}
+              bg-danger
+            {% elif amount.amount > 30 and amount.amount <= 60 %}
+              bg-warning
+            {% else %}
+              bg-success
+            {% endif %} progress-bar-striped" role="progressbar" aria-valuenow="{{ amount.amount }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ amount.amount }}%">
+              <span>{{ amount.amount }}%</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <a href="#" class="btn btn-primary btn-sm">Request more</a>
+        </div>
+      </div>
+    {% endfor %}
+    
   </div>
   {# Admin user overview #}
 

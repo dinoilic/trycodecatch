@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}Project Hackathon{% endblock title %}</title>
+    <title>{% block title %}Blood Manager{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -47,23 +47,23 @@
               {% if request.user.is_staff %}
 
                 {# administrator #}
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'index_admin' %}">{% trans "Supply overview" %}<span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'supply_overview' %}">{% trans "Supply overview" %}<span class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="{% url 'user_overview' %}">{% trans "User overview" %}<span class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="{% url 'add_donator' %}">{% trans "Add donator" %}<span class="sr-only">(current)</span></a>
                 </li>
               {% else %}
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="{% url 'index_user' %}">{% trans "My donations" %}<span class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="{% url 'my_profile' %}">{% trans "My profile" %}<span class="sr-only">(current)</span></a>
                 </li>
 
