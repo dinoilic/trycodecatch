@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<h1>Notifications</h1>
+	</div>
+	<div class="row">
+		{% for notification in notifications %}
+			<div class="col-md-4">
+				<div class="card" style="width: 18rem;">
+					<div class="card-header">
+						{{ notification.title }}
+					</div>
+					<div class="card-body">
+						<p class="card-text">{{ notification.message }}</p>
+						{% if 1 %}
+							<a href="#" class="card-link">Yes</a>
+							<a href="#" class="card-link">No</a>
+						{% else %}
+							<a href="#" class="card-link">Dismiss</a>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock content %}

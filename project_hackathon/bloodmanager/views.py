@@ -12,6 +12,14 @@ def index_admin(request):
 
     })
 
+def user_home(request):
+    notifications = Notification.objects.filter(
+        user=request.user
+    )
+    return render(request, "bloodmanager/user_home.html", {
+        'notifications': notifications
+    })
+
 def user_overview(request):
     all_users = get_user_model().objects.all()
     return render(request, "bloodmanager/user_overview.html", {

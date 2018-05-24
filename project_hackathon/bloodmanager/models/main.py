@@ -57,15 +57,16 @@ class BloodUnit(models.Model):
             self.bloodtype
         )
 
-    class Event(models.Model):
-        name = models.CharField(max_length=255)
-        datetime = models.DateTimeField(auto_now=False)
 
-        def __str__(self):
-            return u'%s - %s' % (
-                self.name,
-                self.datetime
-            )
+class Event(models.Model):
+    name = models.CharField(max_length=255)
+    datetime = models.DateTimeField(auto_now=False)
+
+    def __str__(self):
+        return u'%s - %s' % (
+            self.name,
+            self.datetime
+        )
 
 
 class EventUser(models.Model):
@@ -75,7 +76,7 @@ class EventUser(models.Model):
         on_delete=models.PROTECT
     )
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, 
+        settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT
     )
 
@@ -83,4 +84,3 @@ class EventUser(models.Model):
         return u'%s' % (
             self.answer,
         )
-
