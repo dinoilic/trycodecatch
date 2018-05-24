@@ -73,8 +73,8 @@ class Event(models.Model):
 
 class EventUser(models.Model):
     answer = models.CharField(max_length=100)
-    donation = models.ForeignKey(
-        Donation,
+    event = models.ForeignKey(
+        Event,
         on_delete=models.PROTECT
     )
     user = models.ForeignKey(
