@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from project_hackathon.bloodmanager.models.main import BloodAmount
 from django.db.models import Max
 from project_hackathon.bloodmanager.models.common import Institution, Notification
-
+from django.contrib.auth import get_user_model
 from bloodmanager.forms import UserForm
 
 def index_admin(request):
@@ -12,9 +12,9 @@ def index_admin(request):
     })
 
 def user_overview(request):
-
+    all_users = get_user_model().objects.all()
     return render(request, "bloodmanager/user_overview.html", {
-
+        'users': all_users,
     })
 
 def supply_overview(request):
