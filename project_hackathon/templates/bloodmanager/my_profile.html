@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n crispy_forms_tags %}
+{% crispy UserForm UserForm.helper %}
 
 {% block content %}
 
@@ -11,16 +12,34 @@
     </header>
     <div class="filter-content">
       <div class="card-body">
-        <p><strong>{% trans "Tel. number:" %} </strong> {{ request.user.telephone_number }} </p>
-        <p><strong>{% trans "Date of birth:" %} </strong> {{ request.user.date_of_birth }}</p>
-        <p><strong>{% trans "Gender:" %} </strong>{{ request.user.gender }}</p>
-        <p><strong>{% trans "Location:" %} </strong> {{ request.user.location }}</p>
-        <p><strong>{% trans "Institution" %} </strong> {{ request.user.institution.name }}</p>
-        <p><strong>{% trans "Blood type:" %} </strong>{{ request.user.bloodtype }}</p>
-        <footer><button class="btn btn-primary">{% trans "Edit" %}&nbsp<i class="far fa-edit"></i></button></footer>
-      </div> <!-- card-body.// -->
-    </div>
-  </article> <!-- card-group-item.// -->
+        <div id="profile_info_id">
+          <p><strong>{% trans "Tel. number:" %} </strong> {{ request.user.telephone_number }} </p>
+          <p><strong>{% trans "Date of birth:" %} </strong> {{ request.user.date_of_birth }}</p>
+          <p><strong>{% trans "Gender:" %} </strong>{{ request.user.gender }}</p>
+          <p><strong>{% trans "Location:" %} </strong> {{ request.user.location }}</p>
+          <p><strong>{% trans "Institution" %} </strong> {{ request.user.institution.name }}</p>
+          <p><strong>{% trans "Blood type:" %} </strong>{{ request.user.bloodtype }}</p>
+          <button id="edit_profile_btn" class="btn btn-primary">{% trans "Edit" %}&nbsp<i class="far fa-edit"></i></button>
+        </div>
 
-</div> <!-- card.// -->
+        <div id="profile_form_id">
+          <form action="{% url 'my_profile' %}" method="post">
+            {% crispy form %}
+            <button class="btn btn-success">{% trans "Apply" %}&nbsp<i class="far fa-edit"></i></button>
+            <button id="cancel_edit_btn_id" class="btn btn-danger">{% trans "Cancel" %}&nbsp<i class="fas fa-times"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</div>
 {% endblock content %}
+
+{% block javascript %}
+  {{ block.super }}
+  <script type="text/javascript">
+    DH.editProfileInfo();
+    DH.cancelEditProfile();
+  </script>
+{% endblock javascript %}

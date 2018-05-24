@@ -3,6 +3,7 @@ from project_hackathon.bloodmanager.models.main import BloodAmount
 from django.db.models import Max
 from project_hackathon.bloodmanager.models.common import Institution, Notification
 
+from bloodmanager.forms import UserForm
 
 def index_admin(request):
 
@@ -43,12 +44,30 @@ def index_user(request):
     })
 
 def my_profile(request):
+
+    initial_data = {
+        'name': request.user.name,
+        'email': request.user.email,
+        'comment': request.user.comment,
+        'bloodtype': request.user.bloodtype,
+        'institution': request.user.institution.name,
+        'location': request.user.location,
+        'date_of_birth': request.user.date_of_birth,
+        'gender': request.user.gender
+    }
+
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+
+            return HttpResponseRedirect(reverse('my_profile'))
+
+    else:
+        form = UserForm(initial=initial_data)
     return render(request, "bloodmanager/my_profile.html", {
-
+        'form': form,
     })
-    # return render(request, "bloodmanager/donation_overview.html", {
-
-    # })
 
 
 def send_notification(request, pk, blood_type):
@@ -66,3 +85,4 @@ def send_notification(request, pk, blood_type):
             )
 
     return redirect('supply_overview')
+
