@@ -14,6 +14,12 @@ class BloodAmount(models.Model):
         choices=BLOOD_CHOICES
     )
 
+    def __str__(self):
+        return u'%d - %s' % (
+            self.amount,
+            self.bloodtype
+        )
+
 class Donation(models.Model):
     datetime = models.DateTimeField(
         _('Date and time of Donation'),
@@ -29,6 +35,10 @@ class Donation(models.Model):
     )
     institution = models.ForeignKey(Institution, on_delete=models.PROTECT)
 
+    def __str__(self):
+        return u'%s' % (
+            self.datetime,
+        )
 
 class BloodUnit(models.Model):
     expiration_date = models.DateTimeField(
@@ -40,3 +50,9 @@ class BloodUnit(models.Model):
         choices=BLOOD_CHOICES
     )
     donation = models.ForeignKey(Donation, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return u'%s - %s' % (
+            self.expiration_date,
+            self.bloodtype
+        )

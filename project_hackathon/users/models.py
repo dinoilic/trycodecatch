@@ -38,7 +38,7 @@ class User(AbstractUser):
         blank=True,
         null=True
     )
-    comment = models.CharField(
+    comment = models.TextField(
         _('Additional information such as gift-giving questionnaires blood'),
         max_length=500,
         null=True
@@ -57,7 +57,7 @@ class User(AbstractUser):
         null=True
     )
     institution = models.ManyToManyField(
-        Institution,    
+        Institution,
         blank=True
     )
 
@@ -66,3 +66,8 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse('users:detail', kwargs={'username': self.username})
+
+    class Meta:
+        verbose_name = {'User'}
+        verbose_name_plural = {'Users'}
+        
