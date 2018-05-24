@@ -20,21 +20,14 @@ BLOOD_CHOICES = (
 
 class Location(models.Model):
 
-    latitude = models.FloatField(
-        _('Latitude of User or Institution'),
-        validators=[MinValueValidator(-90), MaxValueValidator(90)],
-        default=0
-    )
-    longitude = models.FloatField(
-        _('Longitude of User or Institution'),
-        validators=[MinValueValidator(-180), MaxValueValidator(180)],
-        default=0
-    )
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    postal_code = models.IntegerField(null=True)
 
     def __str__(self):
-        return u'%2.f, %2.f' % (
-            self.latitude,
-            self.longitude
+        return u'%s, %s' % (
+            self.address,
+            self.city
         )
 
 
