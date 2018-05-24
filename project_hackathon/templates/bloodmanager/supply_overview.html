@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n humanize %}
 
 {% block content %}
   {# Admin supply overview #}
   <div class="container">
     <div class="row">
-      <h1>Blood overview</h1>
+      <h1>Blood overview: <small>{{ institution.name }}</small></h1>
     </div>
     {% for amount in amounts %}
       <div class="row blood-type-row">
@@ -20,13 +20,13 @@
               bg-warning
             {% else %}
               bg-success
-            {% endif %} progress-bar-striped" role="progressbar" aria-valuenow="{{ amount.amount }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ amount.amount }}%">
-              <span>{{ amount.amount }}%</span>
+            {% endif %} progress-bar-striped" role="progressbar" aria-valuenow="{{ amount.amount }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ amount.perc_amount }}%">
+              <span>{{ amount.perc_amount|floatformat:0|intcomma }}%</span>
             </div>
           </div>
         </div>
         <div class="col-md-1">
-          <a href="#" class="btn btn-primary btn-sm">Request more</a>
+          <a href="{% url 'send_notification' institution.pk amount.bloodtype %}" class="btn btn-primary btn-sm">Request more</a>
         </div>
       </div>
     {% endfor %}
