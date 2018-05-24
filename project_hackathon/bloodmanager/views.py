@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse, HttpResponseRedirect
 from project_hackathon.bloodmanager.models.main import BloodAmount
 from django.db.models import Max
 from django.urls import reverse
@@ -9,6 +9,9 @@ from bloodmanager.forms import UserForm, NotificationForm
 from project_hackathon.bloodmanager.models.main import Donation, Event, EventUser
 from django.http import HttpResponseRedirect
 from bloodmanager.forms import UserForm, NewUserForm, EventForm
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from project_hackathon.users.models import User
 
 
 def index_admin(request):
@@ -262,3 +265,17 @@ def respond_event(request, pk, answer):
     notification.save()
 
     return redirect('user_home')
+
+
+
+@login_required()
+def add_donation(request):
+    if request.method == 'GET':
+        data = request.GET['id']
+        user = User.objects.get(id=data)
+        new_donation = Donation(
+            user=user,
+            institution=user.institution.first()
+            )
+        new_donation.save()
+        return redirect('supply_overview')

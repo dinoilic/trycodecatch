@@ -2,22 +2,80 @@
 {% load i18n %}
 
 {% block content %}
-   <div id="reader" style="width:300px;height:250px"></div>
+<div class="container">
+  <div class="row"><div class="col"><h2>Please scan the donor's QR code</h2></div></div>
+  <div class="row">
+    <div class="col-10"><video id="preview"></video></div>
+    <div class="col-2"><img id="qr_success" style="height:30%; margin:150px 100px 0 0; visibility: hidden" src="http://www.clker.com/cliparts/G/z/2/Q/1/p/tick-mark-hi.png"></img></div>
+  </div>
+</div>
   {% block javascript %}
   	{{ block.super }}
     <script type="text/javascript">
-      $('#reader').html5_qrcode(function(data){
-         console.log("Result");
-         console.log(data);
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      scanner.addListener('scan', function (content) {
+        var img = document.getElementById('qr_success');
+        img.style.visibility = 'visible';
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (settings.type == 'POST' || settings.type == 'PUT' || settings.type == 'DELETE') {
+                    function getCookie(name) {
+                        var cookieValue = null;
+                        if (document.cookie && document.cookie != '') {
+                            var cookies = document.cookie.split(';');
+                            for (var i = 0; i < cookies.length; i++) {
+                                var cookie = jQuery.trim(cookies[i]);
+                                // Does this cookie string begin with the name we want?
+                                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                    break;
+                                }
+                            }
+                        }
+                        return cookieValue;
+                    }
+                    if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                        // Only send the token to relative URLs i.e. locally.
+                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                    }
+                }
+            }
+        });
+        console.log("Successful:");
+        console.log(content);
+        console.log("End Successful");
+        $.get("http://localhost:3000/add_donation/?id=" + content,  
+          function() {
+              setTimeout(function() {
+                window.location.href = "http://localhost:3000/supply_overview";
+              }, 1500);
+              console.log("DONE");
+           } 
+         );
+      });
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+    </script>
+    <script type="text/javascript">
+      scanner.addListener('scan', function () {
+        
       },
       function(error){
         //show read errors
+        console.log("Error: ");
         console.log(error); 
       }, function(videoError){
         //the video stream could be opened
+        console.log("VideoError: ");
         console.log(videoError);
-      }
-    );
+    });
     </script>
   {% endblock javascript %}
 
