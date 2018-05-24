@@ -8,7 +8,7 @@ from bloodmanager.views import index_admin, index_user, user_overview,\
                                add_donator, my_profile, supply_overview,\
                                send_notification, send_notification_user,\
                                new_donation, user_home, dismiss_notification,\
-                               list_events, detail_event, respond_event
+                               list_events, detail_event, respond_event, add_donation
 
 
 urlpatterns = [
@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^news_donation/$', new_donation, name='new_donation'),
     url(r'^list_events/$', list_events, name='list_events'),
     url(r'^detail_event/(?P<pk>[\d.@+-]+)$', detail_event, name='detail_event'),
+    url(r'^add_donation/$', add_donation, name='add_donation'),
 
     # user
     url(r'^my_donations/$', index_user, name='index_user'),
