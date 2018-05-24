@@ -6,6 +6,9 @@ from django.contrib.auth import get_user_model
 from bloodmanager.forms import UserForm, NotificationForm
 from project_hackathon.bloodmanager.models.main import Donation
 
+from bloodmanager.forms import UserForm, NewUserForm
+
+
 def index_admin(request):
 
     return render(request, "bloodmanager/supply_overview.html", {
@@ -41,9 +44,37 @@ def supply_overview(request):
     })
 
 def add_donator(request):
+    if request.method == 'POST':
+        form = NewUserForm(request.POST)
+        form2 = UserForm(request.POST)
+        if form.is_valid() and form2.is_valid():
+            data = form.cleaned_data
+            data2 = form2.cleaned_data
+
+            # obj = get_user_model().objects.create(
+            #     username=data['username'],
+            #     password=data['password1'],
+            # )
+            # import pdb; pdb.set_trace()
+            # obj.email=data['email'],
+            # obj.telephone_number=data['telephone_number'],
+            # obj.date_of_birth=data['date_of_birth'],
+            # obj.gender=data['gender'],
+            # obj.comment=data['comment'],
+            # obj.bloodtype=data['bloodtype'],
+            # obj.location=data['location'],
+            # obj.institution=data['institution']
+            # obj.save()
+            # import pdb; pdb.set_trace()
+            # return HttpResponseRedirect(reverse('supply_overview'))
+
+    else:
+        form = NewUserForm()
+        form2 = UserForm()
 
     return render(request, "bloodmanager/add_donator.html", {
-
+        'form': form,
+        'form2': form2
     })
 
 def index_user(request):
