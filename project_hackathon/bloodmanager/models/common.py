@@ -50,7 +50,12 @@ class Institution(models.Model):
             self.name,
         )
 
-class Notification(models.Model):
+
+class SignaledModel(models.Model):
+    class Meta:
+        abstract = True
+
+class Notification(SignaledModel):
     title = models.CharField(max_length=255)
     message = models.TextField()
     viewed = models.BooleanField(default=False)
@@ -64,3 +69,12 @@ class Notification(models.Model):
             self.title,
             self.user.username
         )
+
+
+@receiver(post_save, sender=SignaledModel)
+def delete_notification(sender, **kwargs):
+    notifications = Notification.objects.filter(user=settings.AUTH_USER_MODEL)
+
+    for notification in notifications:
+        if notification.viewed:
+            notification.delete()
