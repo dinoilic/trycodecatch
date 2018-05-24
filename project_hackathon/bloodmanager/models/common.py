@@ -67,8 +67,10 @@ class Notification(models.Model):
 
 
 @receiver(post_save, sender=Notification)
-def delete_notification(sender, **kwargs):
-    notifications = Notification.objects.filter(user=settings.AUTH_USER_MODEL)
+def delete_notification(sender, instance, **kwargs):
+    notifications = Notification.objects.filter(
+        user=instance.user
+    )
 
     for notification in notifications:
         if notification.viewed:

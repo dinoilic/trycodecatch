@@ -3,7 +3,7 @@ from project_hackathon.bloodmanager.models.main import BloodAmount
 from django.db.models import Max
 from project_hackathon.bloodmanager.models.common import Institution, Notification
 from django.contrib.auth import get_user_model
-from bloodmanager.forms import UserForm
+from bloodmanager.forms import UserForm, NotificationForm
 
 def index_admin(request):
 
@@ -74,7 +74,7 @@ def send_notification(request, pk, blood_type):
     if request.method == 'GET':
         institution = Institution.objects.get(pk=pk)
         title = 'Alartmantno - fali krvne grupe {}'.format(blood_type)
-        message = "Fali na krvi. Molim vas da donirate"
+        message = "Fali nam krvi. Molim vas da donirate"
         institution_users = institution.user_set.all()
 
         for institution_user in institution_users:
@@ -86,3 +86,29 @@ def send_notification(request, pk, blood_type):
 
     return redirect('supply_overview')
 
+
+def send_notification_user(request):
+    initial_data = {
+        'title': '',
+        'message': '',
+        'user': None,
+    }
+
+    if request.method == 'POST':
+        form = NotificationForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            Notification.objects.create(
+                title=data['title'],
+                message=data['message'],
+                user=data['user'],
+            )
+
+            return redirect('send_notification_user')
+    else:
+        form = NotificationForm(initial=initial_data)
+
+
+    return render(request, "bloodmanager/send_notification_user.html", {
+        'form': form,
+    })

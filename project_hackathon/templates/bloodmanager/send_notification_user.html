@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n crispy_forms_tags %}
+{% crispy UserForm UserForm.helper %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h1>Slanje obavijesti</h1>
+  </div>
+  <div class="row">
+    <form action="{% url 'send_notification_user' %}" method="post">
+      {% csrf_token %}
+      {% crispy form %}
+    </form>
+  </div>
+</div>
+{% endblock content %}
