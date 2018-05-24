@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+   <div id="reader" style="width:300px;height:250px"></div>
+  {% block javascript %}
+  	{{ block.super }}
+    <script type="text/javascript">
+      $('#reader').html5_qrcode(function(data){
+         console.log("Result");
+         console.log(data);
+      },
+      function(error){
+        //show read errors
+        console.log(error); 
+      }, function(videoError){
+        //the video stream could be opened
+        console.log(videoError);
+      }
+    );
+    </script>
+  {% endblock javascript %}
+
+
+
+{% endblock content %}
