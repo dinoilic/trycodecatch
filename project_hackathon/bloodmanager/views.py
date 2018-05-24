@@ -58,7 +58,7 @@ def add_donator(request):
                 username=data['username'],
                 password=data['password1']
             )
-            print("NAME " + data2['name'])
+
             obj.name = data2['name']
             obj.email = data2['email']
             obj.telephone_number = data2['telephone_number']
@@ -100,7 +100,7 @@ def my_profile(request):
         'email': request.user.email,
         'comment': request.user.comment,
         'bloodtype': request.user.bloodtype,
-        'institution': request.user.institution.name,
+        'institution': request.user.institution.all(),
         'location': request.user.location,
         'date_of_birth': request.user.date_of_birth,
         'gender': request.user.gender
@@ -121,7 +121,7 @@ def my_profile(request):
             obj.bloodtype = data['bloodtype']
             obj.location = data['location']
             obj.save()
-            obj.institution.set(data['institution'])
+            obj.institution.add(*data['institution'])
 
             return HttpResponseRedirect(reverse('my_profile'))
 

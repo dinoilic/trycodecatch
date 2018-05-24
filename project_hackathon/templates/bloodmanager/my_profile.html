@@ -13,11 +13,12 @@
     <div class="filter-content">
       <div class="card-body">
         <div id="profile_info_id">
+
           <p><strong>{% trans "Tel. number:" %} </strong> {{ request.user.telephone_number }} </p>
           <p><strong>{% trans "Date of birth:" %} </strong> {{ request.user.date_of_birth }}</p>
           <p><strong>{% trans "Gender:" %} </strong>{{ request.user.gender }}</p>
           <p><strong>{% trans "Location:" %} </strong> {{ request.user.location }}</p>
-          <p><strong>{% trans "Institution" %} </strong> {{ request.user.institution.name }}</p>
+          <p><strong>{% trans "Institution" %} </strong> {{ request.user.institution.first.name }}</p>
           <p><strong>{% trans "Blood type:" %} </strong>{{ request.user.bloodtype }}</p>
           <button id="edit_profile_btn" class="btn btn-primary">{% trans "Edit" %}&nbsp<i class="far fa-edit"></i></button>
         </div>
