@@ -1,6 +1,10 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n crispy_forms_tags %}
 
 {% block content %}
-dodaj donatora usera
+<form action="{% url 'add_donator' %}" method="post">
+  {% crispy form %}
+  {% crispy form2 %}
+  <button class="btn btn-success">{% trans "Add user" %}</button>
+</form>
 {% endblock content %}
