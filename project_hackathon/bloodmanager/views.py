@@ -4,6 +4,7 @@ from django.db.models import Max
 from project_hackathon.bloodmanager.models.common import Institution, Notification
 from django.contrib.auth import get_user_model
 from bloodmanager.forms import UserForm, NotificationForm
+from project_hackathon.bloodmanager.models.main import Donation
 
 def index_admin(request):
 
@@ -38,9 +39,15 @@ def add_donator(request):
     })
 
 def index_user(request):
-
+    user = request.user
+    donations = Donation.objects.filter(user=user.id)
+    institutions = []
+    for donation in donations:
+        institutions.append(donation.institution)
     return render(request, "bloodmanager/my_donations.html", {
-
+        'user': user,
+        'donations': donations,
+        'institutions': institutions
     })
 
 def my_profile(request):
@@ -67,6 +74,12 @@ def my_profile(request):
         form = UserForm(initial=initial_data)
     return render(request, "bloodmanager/my_profile.html", {
         'form': form,
+    })
+
+
+def new_donation(request):
+    return render(request, "bloodmanager/new_donation.html", {
+
     })
 
 

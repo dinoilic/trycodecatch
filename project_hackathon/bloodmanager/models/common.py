@@ -37,6 +37,7 @@ class Location(models.Model):
             self.longitude
         )
 
+
 class Institution(models.Model):
 
     name = models.CharField(
