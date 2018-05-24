@@ -61,6 +61,7 @@ class BloodUnit(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=255)
+    description = models.TextField()
     datetime = models.DateTimeField(auto_now=False)
 
     def __str__(self):
