@@ -96,7 +96,8 @@ class Notification(models.Model):
     )
     event = models.ForeignKey(
         Event, 
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        null=True
     )
 
     def __str__(self):
