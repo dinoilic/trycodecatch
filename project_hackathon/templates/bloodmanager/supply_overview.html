@@ -10,7 +10,7 @@
     {% for amount in amounts %}
       <div class="row blood-type-row">
         <div class="col-md-1">
-          <h6>{{ amount.bloodtype }}</h6>
+          <h6>{{ amount.bloodtype }} <small>({{ amount.amount }})</small></h6>
         </div>
         <div class="col-md-10">
           <div class="progress">
