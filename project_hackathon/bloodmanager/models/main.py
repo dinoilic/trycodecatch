@@ -56,3 +56,31 @@ class BloodUnit(models.Model):
             self.expiration_date,
             self.bloodtype
         )
+
+    class Event(models.Model):
+        name = models.CharField(max_length=255)
+        datetime = models.DateTimeField(auto_now=False)
+
+        def __str__(self):
+            return u'%s - %s' % (
+                self.name,
+                self.datetime
+            )
+
+
+class EventUser(models.Model):
+    answer = models.CharField(max_length=100)
+    donation = models.ForeignKey(
+        Donation,
+        on_delete=models.PROTECT
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.PROTECT
+    )
+
+    def __str__(self):
+        return u'%s' % (
+            self.answer,
+        )
+
