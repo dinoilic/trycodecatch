@@ -17,4 +17,5 @@
 .blood-type-row {
   -webkit-box-align: baseline;
       -ms-flex-align: baseline;
-          align-items: baseline; }
+          align-items: baseline;
+  margin-bottom: 20px; }

@@ -4,8 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
-from bloodmanager.views import index_admin, index_user, user_overview, add_donator,\
-        my_profile, supply_overview, send_notification, new_donation
+from bloodmanager.views import index_admin, index_user, user_overview, add_donator, my_profile, supply_overview, send_notification, send_notification_user, new_donation
 
 
 urlpatterns = [
@@ -15,6 +14,7 @@ urlpatterns = [
     url(r'^user_overview/$', user_overview, name='user_overview'),
     url(r'^add_donator/$', add_donator, name='add_donator'),
     url(r'^send_notification/(?P<pk>[\d.@+-]+)/(?P<blood_type>[\w.@+-]+)$', send_notification, name='send_notification'),
+    url(r'^send_notification_user/$', send_notification_user, name='send_notification_user'),
     url(r'^news_donation/$', new_donation, name='new_donation'),
 
     # user
